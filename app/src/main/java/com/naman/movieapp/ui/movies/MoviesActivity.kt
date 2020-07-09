@@ -41,6 +41,8 @@ class MoviesActivity : AppCompatActivity(), ICallback, KodeinAware {
 
         setSearchView()
 
+        supportActionBar?.title = "Movies"
+
         movieViewModel = ViewModelProviders.of(this,viewModelFactory).get(MovieViewModel::class.java)
 
         movieViewModel.getNetworkState().observe(this, Observer {
