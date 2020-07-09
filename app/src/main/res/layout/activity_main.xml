@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.movies.MoviesActivity"
+    android:layout_margin="20dp"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    tools:context=".ui.movies.MoviesActivity">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:queryHint="Enter movie Name"/>
+        app:queryHint="Enter movie Name" />
+
+    <include
+        android:id="@+id/networkStateLayout"
+        layout="@layout/network_state_layout"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="20dp"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp" />
 </LinearLayout>

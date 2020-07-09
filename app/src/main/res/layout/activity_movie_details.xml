@@ -7,7 +7,13 @@
     android:orientation="vertical"
     tools:context=".ui.movieDetails.MovieDetails">
 
+    <include
+        android:id="@+id/networkStateLayout"
+        layout="@layout/network_state_layout"
+        android:visibility="gone" />
+
     <ScrollView
+        android:id="@+id/movieDetailsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

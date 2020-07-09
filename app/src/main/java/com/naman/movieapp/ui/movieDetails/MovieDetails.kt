@@ -3,14 +3,19 @@ package com.naman.movieapp.ui.movieDetails
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.naman.movieapp.R
+import com.naman.movieapp.data.repository.NetworkState
 import com.naman.movieapp.data.response.MovieResponse
 import com.naman.movieapp.ui.viewModel.MovieViewModel
 import com.naman.movieapp.ui.viewModel.MovieViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import kotlinx.android.synthetic.main.activity_movie_details.networkStateLayout
+import kotlinx.android.synthetic.main.network_state_layout.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -31,15 +36,42 @@ class MovieDetails : AppCompatActivity(), KodeinAware {
         val cityName = handleIntent()
 
         supportActionBar?.title = cityName
-
         val movieDetailsViewModel = ViewModelProviders.of(this,viewModelFactory).get(
             MovieViewModel::class.java)
+
+        movieDetailsViewModel.getNetworkState().observe(this, Observer {
+            checkNetworkState(it)
+        })
 
         movieDetailsViewModel.getMovieDetailsLiveData().observe(this, Observer {
             initUI(it)
         })
 
         movieDetailsViewModel.getMovieDetails(cityName)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun checkNetworkState(it: NetworkState) {
+        when {
+            it.status.name.equals("RUNNING") -> {
+                networkStateLayout.visibility = View.VISIBLE
+                llProgressView.visibility = View.VISIBLE
+                movieDetailsLayout.visibility = View.GONE
+                tvNetworkMsg.text = "Loading"
+            }
+            it.status.name.equals("SUCCESS") -> {
+                networkStateLayout.visibility = View.GONE
+                llProgressView.visibility = View.GONE
+                movieDetailsLayout.visibility = View.VISIBLE
+            }
+            else -> {
+                networkStateLayout.visibility = View.VISIBLE
+                llProgressView.visibility = View.GONE
+                llErrorMsg.visibility = View.VISIBLE
+                movieDetailsLayout.visibility = View.GONE
+
+            }
+        }
     }
 
     override fun onBackPressed() {

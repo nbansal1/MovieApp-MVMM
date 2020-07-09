@@ -3,6 +3,7 @@ package com.naman.movieapp.ui.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.naman.movieapp.data.repository.MovieRepository
+import com.naman.movieapp.data.repository.NetworkState
 import com.naman.movieapp.data.response.MovieLists
 import com.naman.movieapp.data.response.MovieResponse
 import kotlinx.coroutines.Dispatchers
@@ -25,5 +26,9 @@ class MovieViewModel(val movieRepository: MovieRepository) : ViewModel() {
 
     fun getMovieListLiveData() : LiveData<MovieLists> {
         return movieRepository.downloadedMovieListResponse
+    }
+
+    fun getNetworkState() : LiveData<NetworkState>{
+        return movieRepository.networkState
     }
 }

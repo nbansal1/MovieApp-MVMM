@@ -27,18 +27,26 @@ class MovieRepository( val apiSource : MovieAPIInterface) {
         try {
             val movieResponse =  apiSource.getMovieDetails(movieName).await()
             _downloadedMovieResponse.postValue(movieResponse)
+            _networkState.postValue(NetworkState.LOADED)
         } catch (e : Exception) {
             Log.e("ERROR", "", e)
+            _networkState.postValue(NetworkState.ERROR)
         }
     }
 
     suspend fun getMovieLists(movieName : String?) {
+        if(movieName?.length!! < 3) {
+            _networkState.postValue(NetworkState.LOADING)
+            return
+        }
         _networkState.postValue(NetworkState.LOADING)
         try {
             val movieResponse =  apiSource.getMovieList(movieName).await()
             _downloadedMovieListResponse.postValue(movieResponse)
+            _networkState.postValue(NetworkState.LOADED)
         } catch (e : Exception) {
             Log.e("ERROR", "", e)
+            _networkState.postValue(NetworkState.ERROR)
         }
     }
 }
