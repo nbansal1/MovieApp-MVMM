@@ -1,4 +1,6 @@
-# MovieApp-MVMM Movie Seraching App with MVVM pattern + Retrofit + Coroutine + Kodein + Kotlin
+# MovieApp
+# Movie Seraching App with MVVM pattern + Retrofit + Coroutine + Kodein + Kotlin
+
 ![GitHub Logo](/image/Movie.png)
 
 
