@@ -1,7 +1,7 @@
 # MovieApp-MVMM 
-![GitHub Logo](/images/Movie.png)
+![GitHub Logo](/image/Movie.png)
 Format: ![Alt Text](url)
 
 
-![GitHub Logo](/images/MovieDetails.png)
+![GitHub Logo](/image/MovieDetails.png)
 Format: ![Alt Text](url)
