@@ -94,6 +94,7 @@ class MovieDetails : AppCompatActivity(), KodeinAware {
         tv_director.text = " Director - ${movieResponse.director}"
         tv_writer.text = " Writer - ${movieResponse.writer}"
         tv_actor.text = " Actors - ${movieResponse.actors}"
+        tv_Reviews.text = movieResponse.imdbVotes
     }
 
     private fun handleIntent() : String {
